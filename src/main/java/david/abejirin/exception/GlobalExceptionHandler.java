@@ -1,7 +1,10 @@
 package david.abejirin.exception;
 
 import david.abejirin.payload.response.ErrorResponse;
+import io.jsonwebtoken.MalformedJwtException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -46,5 +49,21 @@ public class GlobalExceptionHandler {
                 "An unexpected error occurred"
         );
         return ResponseEntity.internalServerError().body(error);
+    }
+    @ExceptionHandler(MalformedJwtException.class)
+    public ResponseEntity<ErrorResponse> handleMalformedJwtException(MalformedJwtException ex) {
+        ErrorResponse error = new ErrorResponse(
+                "JWT_ERROR",
+                "Invalid JWT token format. JWT strings must contain exactly 2 period characters."
+        );
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
+    }
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ErrorResponse> handleBadCredException(BadCredentialsException ex) {
+        ErrorResponse error = new ErrorResponse(
+                "INVALID_DETAILS",
+                "Wrong username or password"
+        );
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
     }

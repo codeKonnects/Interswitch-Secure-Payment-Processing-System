@@ -1,10 +1,10 @@
 server:
   port: 8080
-  ssl:
-    enabled: true
-    key-store: classpath:keystore.p12
-    key-store-password: ${KEY_STORE_PASSWORD:yourpassword}
-    key-store-type: PKCS12
+#  ssl:
+#    enabled: true
+#    key-store: classpath:keystore.p12
+#    key-store-password: ${KEY_STORE_PASSWORD:yourpassword}
+#    key-store-type: PKCS12
 
 spring:
   datasource:
@@ -24,7 +24,8 @@ spring:
       settings:
         web-allow-others: false
 
+
 security:
   jwt:
-    secret: ${JWT_SECRET:your-256-bit-secret}
+    secret: ${JWT_SECRET:KEY}
     expiration: 86400000

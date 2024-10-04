@@ -1,10 +1,12 @@
-package david.abejirin.service;
+package david.abejirin.service.impl;
 
 import david.abejirin.entity.Payment;
 import david.abejirin.enums.PaymentStatus;
 import david.abejirin.exception.PaymentProcessingException;
 import david.abejirin.payload.requests.PaymentRequest;
 import david.abejirin.repository.PaymentRepository;
+import david.abejirin.service.PaymentGatewayService;
+import david.abejirin.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +16,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class PaymentServiceImpl implements PaymentService{
+public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
     private final PaymentGatewayService gatewayService;
 

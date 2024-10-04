@@ -2,6 +2,7 @@ package david.abejirin.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,7 +45,10 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    private Claims extractAllClaims(String token) {
+    private Claims extractAllClaims(String token) throws MalformedJwtException{
+        if (token == null || token.isEmpty()) {
+            throw new MalformedJwtException("JWT token is missing or empty");
+        }
         return Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
                 .build()
