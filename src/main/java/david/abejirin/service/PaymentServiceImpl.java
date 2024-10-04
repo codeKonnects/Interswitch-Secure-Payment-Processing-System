@@ -2,6 +2,7 @@ package david.abejirin.service;
 
 import david.abejirin.entity.Payment;
 import david.abejirin.enums.PaymentStatus;
+import david.abejirin.exception.PaymentProcessingException;
 import david.abejirin.payload.requests.PaymentRequest;
 import david.abejirin.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
